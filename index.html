@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garena - Trung tâm nạp thẻ chính thức</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ================= RESET & BASE ================= */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #f6f6f6;
+            color: #333333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        /* ================= HEADER ================= */
+        .navbar {
+            background-color: #ffffff;
+            height: 56px;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-garena-img {
+            height: 32px;
+            width: auto;
+        }
+
+        .divider {
+            color: #ccc;
+        }
+
+        .site-title {
+            font-size: 0.95rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .user-profile-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .avatar-circle {
+            width: 32px;
+            height: 32px;
+            background: #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* ================= PROMO BANNER ================= */
+        .banner-container {
+            background: #111;
+            padding: 16px 0;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .banner-card {
+            width: 100%;
+            max-width: 960px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin: 0 16px;
+        }
+
+        .banner-img {
+            width: 100%;
+            display: block;
+        }
+
+        /* ================= GAME SELECTION ================= */
+        .game-selection-section {
+            background: #f1ebd9;
+            padding: 20px 0;
+            border-bottom: 1px solid #e0d8c3;
+        }
+
+        .section-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .section-label {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        .game-grid {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .game-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            min-width: 80px;
+            text-decoration: none;
+        }
+
+        .game-icon-wrapper {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            background: #eee;
+        }
+
+        .game-icon-wrapper img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .game-item.active .game-icon-wrapper {
+            border-color: #e21b22;
+            box-shadow: 0 0 0 2px #e21b22;
+        }
+
+        .game-item.active .game-icon-wrapper::after {
+            content: "✓";
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #e21b22;
+            color: #fff;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-name {
+            font-size: 0.78rem;
+            color: #444;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .game-item.active .game-name {
+            color: #e21b22;
+            font-weight: 700;
+        }
+
+        /* ================= MAIN CONTAINER ================= */
+        .main-container {
+            max-width: 960px;
+            margin: 24px auto;
+            padding: 0 16px;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* Banner Free Fire Sub */
+        .ff-banner {
+            background: linear-gradient(90deg, #1c1c1c 0%, #3a3a3a 100%);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+
+        .ff-avatar {
+            width: 54px;
+            height: 54px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            background: #222;
+        }
+
+        .ff-avatar img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .ff-info h2 {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .safe-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255,255,255,0.15);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Step Headings */
+        .step-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111;
+            margin: 24px 0 14px 0;
+        }
+
+        .step-badge {
+            background: #e21b22;
+            color: #fff;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        /* Step 1: Login Box */
+        .login-card {
+            background: #fafafa;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .login-card label {
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #444;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .input-group {
+            display: flex;
+            max-width: 400px;
+            margin-bottom: 16px;
+        }
+
+        .input-field {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid #cccccc;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            font-size: 0.95rem;
+            background: #fff;
+        }
+
+        .input-field:focus {
+            border-color: #e21b22;
+        }
+
+        .btn-login {
+            background: #e21b22;
+            color: #ffffff;
+            border: none;
+            padding: 10px 22px;
+            font-weight: 700;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-login:hover {
+            background: #c8181e;
+        }
+
+        /* Step 2: Denominations */
+        .tab-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .tab-btn {
+            padding: 6px 18px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            background: #fff;
+            color: #555;
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            border-color: #e21b22;
+            color: #e21b22;
+            box-shadow: 0 0 0 1px #e21b22;
+        }
+
+        .denom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .denom-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .denom-card:hover {
+            border-color: #e21b22;
+        }
+
+        .denom-card.active {
+            border-color: #e21b22;
+            box-shadow: 0 0 0 2px #e21b22;
+        }
+
+        .denom-price {
+            padding: 10px 6px 6px 6px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #222;
+        }
+
+        .denom-diamonds {
+            background: #f5f5f5;
+            padding: 6px;
+            font-size: 0.85rem;
+            color: #1976d2;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .denom-card.active .denom-diamonds {
+            background: #ffebee;
+            color: #e21b22;
+        }
+
+        /* Step 3: Payment Methods */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+        }
+
+        .payment-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            user-select: none;
+        }
+
+        .payment-card:hover {
+            border-color: #e21b22;
+        }
+
+        .payment-card.active {
+            border-color: #e21b22;
+            box-shadow: 0 0 0 2px #e21b22;
+            background: #fffcfc;
+        }
+
+        .payment-card .hot-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #ff3d00;
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-bottom-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        .payment-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: #f9f9f9;
+        }
+
+        .payment-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .payment-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .payment-amount {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #222;
+        }
+
+        .payment-diamonds {
+            font-size: 0.85rem;
+            color: #1976d2;
+            font-weight: 500;
+        }
+
+        /* Bottom Checkout Bar */
+        .bottom-bar {
+            margin-top: 30px;
+            padding: 16px 20px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .summary-text {
+            text-align: right;
+            font-size: 0.88rem;
+            color: #666;
+        }
+
+        .summary-diamonds {
+            color: #1976d2;
+            font-weight: 700;
+            font-size: 1rem;
+            display: block;
+        }
+
+        .btn-submit-pay {
+            background: #f1999b;
+            color: #ffffff;
+            border: none;
+            padding: 12px 28px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: not-allowed;
+            transition: all 0.2s;
+        }
+
+        .btn-submit-pay.ready {
+            background: #e21b22;
+            cursor: pointer;
+        }
+
+        .btn-submit-pay.ready:hover {
+            background: #c8181e;
+        }
+
+        /* ================= MODAL ================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            padding: 16px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 420px;
+            padding: 24px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #e21b22;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .modal-body {
+            background: #f9f9f9;
+            padding: 14px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .modal-body span {
+            font-weight: bold;
+            color: #111;
+        }
+
+        .btn-close-modal {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            color: #888;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            padding: 20px 24px;
+            font-size: 0.78rem;
+            color: #777;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        footer a {
+            color: #666;
+            text-decoration: none;
+            margin-left: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="#">
+                <!-- THAY LINK LOGO GARENA TẠI ĐÂY -->
+                <img src="https://cdn.phototourl.com/member/2026-09-28-da3cf786-a99d-4313-ab81-814b30266374.png" alt="Garena Logo" class="logo-garena-img">
+            </a>
+            <span class="divider">|</span>
+            <span class="site-title">Trung tâm nạp thẻ chính thức</span>
+        </div>
+        <button id="userStatusBtn" class="user-profile-btn">
+            <div class="avatar-circle">
+                <!-- THAY LINK AVATAR TẠI ĐÂY -->
+                <img src="https://cdn.phototourl.com/member/2026-09-28-b2edb274-c96a-43ad-a75c-c520981f0b2b.png" alt="Avatar">
+            </div>
+        </button>
+    </nav>
+
+    <!-- Banner ShopeePay Sale -->
+    <div class="banner-container">
+        <div class="banner-card">
+            <!-- THAY LINK BANNER KHUYẾN MÃI TẠI ĐÂY -->
+            <img src="https://cdn.imagetourls.com/uploads/tyImg/1ThRxwBQ.png" alt="Screenshot 2026-09-28 152522.png" alt="Banner Khuyến Mãi" class="banner-img">
+        </div>
+    </div>
+
+    <!-- Game Selector -->
+    <div class="game-selection-section">
+        <div class="section-inner">
+            <div class="section-label">Lựa chọn trò chơi</div>
+            <div class="game-grid">
+                <!-- GAME 1 -->
+                <a class="game-item">
+                    <div class="game-icon-wrapper">
+                        <!-- THAY LINK ICON GAME TẠI ĐÂY -->
+                        <img src="https://cdn.phototourl.com/member/2026-09-28-f4e1bff4-315f-495d-91c8-1fd9b67849ab.png" alt="FC Mobile">
+                    </div>
+                    <span class="game-name">FC Mobile VN</span>
+                </a>
+                <!-- GAME 2 -->
+                <a class="game-item">
+                    <div class="game-icon-wrapper">
+                        <!-- THAY LINK ICON GAME TẠI ĐÂY -->
+                        <img src="https://cdn.phototourl.com/member/2026-09-28-7ca3a581-81fc-4ed5-a115-601a7392ac38.png" alt="Lien Quan">
+                    </div>
+                    <span class="game-name">Liên Quân Mobile</span>
+                </a>
+                <!-- GAME 3 (FREE FIRE) -->
+                <a class="game-item active">
+                    <div class="game-icon-wrapper">
+                        <!-- THAY LINK ICON GAME TẠI ĐÂY -->
+                        <img src="https://cdn.phototourl.com/member/2026-09-28-763d046e-2237-4ed1-ab26-f42a46bbeb9d.png" alt="Free Fire">
+                    </div>
+                    <span class="game-name">Free Fire</span>
+                </a>
+                <!-- GAME 4 -->
+                <a class="game-item">
+                    <div class="game-icon-wrapper">
+                        <!-- THAY LINK ICON GAME TẠI ĐÂY -->
+                        <img src="https://cdn.phototourl.com/member/2026-09-28-2e91e6ff-8cfa-4da0-ad2a-167fd3fa9309.png" alt="Delta Force">
+                    </div>
+                    <span class="game-name">Delta Force</span>
+                </a>
+                <!-- GAME 5 -->
+                <a class="game-item">
+                    <div class="game-icon-wrapper">
+                        <!-- THAY LINK ICON GAME TẠI ĐÂY -->
+                        <img src="https://cdn.phototourl.com/member/2026-09-28-85307eb5-eb81-451c-af94-bd80da69ca96.png" alt="Nap So">
+                    </div>
+                    <span class="game-name">Nạp Sò</span>
+                </a>
+                <!-- GAME 6 -->
+                <a class="game-item">
+                    <div class="game-icon-wrapper">
+                        <!-- THAY LINK ICON GAME TẠI ĐÂY -->
+                        <img src="https://cdn.phototourl.com/member/2026-09-28-80ae6706-b731-45be-83e4-475452658f91.png" alt="FC Online">
+                    </div>
+                    <span class="game-name">FC Online (VN)</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+
+        <!-- FF Banner Header -->
+        <div class="ff-banner">
+            <div class="ff-avatar">
+                <!-- THAY LINK AVATAR GAME TẠI ĐÂY -->
+                <img src="https://cdn.phototourl.com/member/2026-09-28-763d046e-2237-4ed1-ab26-f42a46bbeb9d.png" alt="Free Fire Banner">
+            </div>
+            <div class="ff-info">
+                <h2>Free Fire</h2>
+                <div class="safe-tag">🛡️ Thanh toán an toàn 100%</div>
+            </div>
+        </div>
+
+        <!-- Step 1: Login -->
+        <div class="step-title">
+            <span class="step-badge">1</span> Đăng nhập
+        </div>
+        <div class="login-card">
+            <label for="uidInput">ID người chơi ⚙️</label>
+            <div class="input-group">
+                <input type="text" id="uidInput" class="input-field" placeholder="Hãy nhập UID của bạn">
+                <button id="btnLogin" class="btn-login">Đăng nhập</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Denominations -->
+        <div class="step-title">
+            <span class="step-badge">2</span> Mệnh giá nạp
+        </div>
+        <div class="tab-group">
+            <button class="tab-btn active">Nạp Online</button>
+            <button class="tab-btn">Thẻ Garena</button>
+            <button class="tab-btn">Shop</button>
+        </div>
+
+        <div class="denom-grid" id="denomGrid">
+            <div class="denom-card" data-price="5.000 đ" data-diamonds="25">
+                <div class="denom-price">5.000 đ</div>
+                <div class="denom-diamonds">💎 25</div>
+            </div>
+            <div class="denom-card" data-price="10.000 đ" data-diamonds="51">
+                <div class="denom-price">10.000 đ</div>
+                <div class="denom-diamonds">💎 51</div>
+            </div>
+            <div class="denom-card active" data-price="20.000 đ" data-diamonds="113">
+                <div class="denom-price">20.000 đ</div>
+                <div class="denom-diamonds">💎 113</div>
+            </div>
+            <div class="denom-card" data-price="50.000 đ" data-diamonds="283">
+                <div class="denom-price">50.000 đ</div>
+                <div class="denom-diamonds">💎 283</div>
+            </div>
+            <div class="denom-card" data-price="100.000 đ" data-diamonds="566">
+                <div class="denom-price">100.000 đ</div>
+                <div class="denom-diamonds">💎 566</div>
+            </div>
+            <div class="denom-card" data-price="200.000 đ" data-diamonds="1.132">
+                <div class="denom-price">200.000 đ</div>
+                <div class="denom-diamonds">💎 1.132</div>
+            </div>
+            <div class="denom-card" data-price="500.000 đ" data-diamonds="2.830">
+                <div class="denom-price">500.000 đ</div>
+                <div class="denom-diamonds">💎 2.830</div>
+            </div>
+            <div class="denom-card" data-price="1.000.000 đ" data-diamonds="5.750">
+                <div class="denom-price">1.000.000 đ</div>
+                <div class="denom-diamonds">💎 5.750</div>
+            </div>
+            <div class="denom-card" data-price="2.000.000 đ" data-diamonds="11.500">
+                <div class="denom-price">2.000.000 đ</div>
+                <div class="denom-diamonds">💎 11.500</div>
+            </div>
+        </div>
+
+        <!-- Step 3: Payment Methods -->
+        <div class="step-title">
+            <span class="step-badge">3</span> Phương thức thanh toán
+        </div>
+        <div class="payment-grid" id="paymentGrid">
+            <!-- PTTT 1 -->
+            <div class="payment-card" data-name="Ví ShopeePay">
+                <span class="hot-badge">HOT</span>
+                <div class="payment-icon">
+                    <!-- THAY LINK ICON TẠI ĐÂY -->
+                    <img src="https://cdn.imagetourls.com/uploads/tyImg/vQjNfX3y.png" alt="Screenshot 2026-09-28 150418.png" alt="ShopeePay">
+                </div>
+                <div class="payment-info">
+                    <span class="payment-amount selected-price">20.000 đ</span>
+                    <span class="payment-diamonds selected-diamonds">💎 113</span>
+                </div>
+            </div>
+            <!-- PTTT 2 -->
+            <div class="payment-card" data-name="Garena Sò">
+                <div class="payment-icon">
+                    <!-- THAY LINK ICON TẠI ĐÂY -->
+                    <img src="https://cdn.imagetourls.com/uploads/tyImg/1clRFEc93.png" alt="Screenshot 2026-09-28 150453.png" alt="Sò">
+                </div>
+                <div class="payment-info">
+                    <span class="payment-amount">🟡 40 Sò</span>
+                    <span class="payment-diamonds selected-diamonds">💎 113</span>
+                </div>
+            </div>
+            <!-- PTTT 3 -->
+            <div class="payment-card" data-name="QR Pay">
+                <div class="payment-icon">
+                    <!-- THAY LINK ICON TẠI ĐÂY -->
+                    <img src="https://cdn.imagetourls.com/uploads/tyImg/pRMrdBi3.png" alt="Screenshot 2026-09-28 150541.png" alt="QR Pay">
+                </div>
+                <div class="payment-info">
+                    <span class="payment-amount selected-price">20.000 đ</span>
+                    <span class="payment-diamonds selected-diamonds">💎 113</span>
+                </div>
+            </div>
+            <!-- PTTT 4 -->
+            <div class="payment-card" data-name="App Ngân Hàng">
+                <div class="payment-icon">
+                    <!-- THAY LINK ICON TẠI ĐÂY -->
+                    <img src="https://cdn.imagetourls.com/uploads/tyImg/10Y855WfO.png" alt="Screenshot 2026-09-28 150439.png" alt="Bank App">
+                </div>
+                <div class="payment-info">
+                    <span class="payment-amount selected-price">20.000 đ</span>
+                    <span class="payment-diamonds selected-diamonds">💎 113</span>
+                </div>
+            </div>
+            <!-- PTTT 5 -->
+            <div class="payment-card" data-name="ATM / iBanking">
+                <div class="payment-icon">
+                    <!-- THAY LINK ICON TẠI ĐÂY -->
+                    <img src="https://cdn.imagetourls.com/uploads/tyImg/1f8neOROY.png" alt="Screenshot 2026-09-28 150530.png" alt="ATM">
+                </div>
+                <div class="payment-info">
+                    <span class="payment-amount selected-price">20.000 đ</span>
+                    <span class="payment-diamonds selected-diamonds">💎 113</span>
+                </div>
+            </div>
+            <!-- PTTT 6 -->
+            <div class="payment-card" data-name="Thẻ Quốc Tế (Visa/Master)">
+                <div class="payment-icon">
+                    <!-- THAY LINK ICON TẠI ĐÂY -->
+                    <img src="https://cdn.imagetourls.com/uploads/tyImg/1gcEc8TVB.png" alt="Screenshot 2026-09-28 150555.png" alt="Screenshot 2026-09-28 150555.png" alt="Visa">
+                </div>
+                <div class="payment-info">
+                    <span class="payment-amount selected-price">20.000 đ</span>
+                    <span class="payment-diamonds selected-diamonds">💎 113</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Checkout Bar -->
+        <div class="bottom-bar">
+            <div class="summary-text">
+                <span class="summary-diamonds" id="summaryDiamondsText">💎 113</span>
+                <span id="statusHintText">Chọn Phương thức thanh toán</span>
+            </div>
+            <button id="btnPay" class="btn-submit-pay">Nạp ngay</button>
+        </div>
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-card">
+            <button class="btn-close-modal" id="btnCloseModal">&times;</button>
+            <div class="modal-title">Xác Nhận Thanh Toán</div>
+            
+            <div class="modal-body">
+                <p>Tài khoản UID: <span id="modalUid">--</span></p>
+                <p>Phương thức: <span id="modalMethod">--</span></p>
+                <p>Gói nạp: <span id="modalDiamonds">--</span> Kim Cương</p>
+                <p>Tổng tiền: <span id="modalPrice" style="color:#e21b22;">--</span></p>
+            </div>
+
+            <div id="modalDynamicContent"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div>
+            CÔNG TY CỔ PHẦN SHOPEEPAY | Mã số doanh nghiệp: 0103959912<br>
+            Tầng 5, Tháp 2, Tòa nhà Capital Place, 29 Liễu Giai, Ba Đình, Hà Nội
+        </div>
+        <div>
+            <a href="#">Câu hỏi thường gặp</a>
+            <a href="#">Trung tâm trợ giúp</a>
+            <a href="#">Điều khoản dịch vụ</a>
+            <a href="#">Chính sách bảo mật</a>
+        </div>
+    </footer>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // State
+            let loggedInUid = null;
+            let selectedPrice = "20.000 đ";
+            let selectedDiamonds = "113";
+            let selectedPaymentMethod = null;
+
+            // DOM Elements
+            const uidInput = document.getElementById('uidInput');
+            const btnLogin = document.getElementById('btnLogin');
+            const userStatusBtn = document.getElementById('userStatusBtn');
+
+            const denomCards = document.querySelectorAll('#denomGrid .denom-card');
+            const paymentCards = document.querySelectorAll('#paymentGrid .payment-card');
+            const priceLabels = document.querySelectorAll('.selected-price');
+            const diamondLabels = document.querySelectorAll('.selected-diamonds');
+
+            const summaryDiamondsText = document.getElementById('summaryDiamondsText');
+            const statusHintText = document.getElementById('statusHintText');
+            const btnPay = document.getElementById('btnPay');
+
+            const checkoutModal = document.getElementById('checkoutModal');
+            const btnCloseModal = document.getElementById('btnCloseModal');
+            const modalUid = document.getElementById('modalUid');
+            const modalMethod = document.getElementById('modalMethod');
+            const modalDiamonds = document.getElementById('modalDiamonds');
+            const modalPrice = document.getElementById('modalPrice');
+            const modalDynamicContent = document.getElementById('modalDynamicContent');
+
+           // 1. Logic Đăng nhập / UID
+            btnLogin.addEventListener('click', () => {
+                if (loggedInUid) {
+                    // Đăng xuất
+                    loggedInUid = null;
+                    uidInput.value = '';
+                    uidInput.disabled = false;
+                    btnLogin.textContent = 'Đăng nhập';
+                    userStatusBtn.innerHTML = `<div class="avatar-circle"><img src="https://via.placeholder.com/32/cccccc/ffffff?text=👤" alt="Avatar"></div>`;
+                    updateCheckoutButtonState();
+                    return;
+                }
+
+                const val = uidInput.value.trim();
+                if (val.length < 6) {
+                    alert('Vui lòng nhập UID Free Fire hợp lệ (tối thiểu 6 chữ số)!');
+                    return;
+                }
+
+                loggedInUid = val;
+                uidInput.disabled = true;
+                btnLogin.textContent = 'Đăng xuất';
+                userStatusBtn.innerHTML = `<span style="font-size:0.85rem; font-weight:bold; color:#e21b22;">UID: ${loggedInUid}</span>`;
+                alert(`Đã xác nhận tài khoản UID: ${loggedInUid}`);
+                updateCheckoutButtonState();
+            });
+
+            // 2. Logic Chọn Mệnh Giá
+            denomCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    denomCards.forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+
+                    selectedPrice = card.getAttribute('data-price');
+                    selectedDiamonds = card.getAttribute('data-diamonds');
+
+                    // Cập nhật text giá & kim cương ở các phương thức thanh toán
+                    priceLabels.forEach(el => el.textContent = selectedPrice);
+                    diamondLabels.forEach(el => el.textContent = `💎 ${selectedDiamonds}`);
+
+                    summaryDiamondsText.textContent = `💎 ${selectedDiamonds}`;
+                    updateCheckoutButtonState();
+                });
+            });
+
+            // 3. Logic Chọn Phương Thức Thanh Toán
+            paymentCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    paymentCards.forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+
+                    selectedPaymentMethod = card.getAttribute('data-name');
+                    statusHintText.textContent = `Thanh toán qua ${selectedPaymentMethod}`;
+                    updateCheckoutButtonState();
+                });
+            });
+
+            // Cập nhật trạng thái nút Nạp Ngay
+            function updateCheckoutButtonState() {
+                if (selectedPaymentMethod) {
+                    btnPay.classList.add('ready');
+                } else {
+                    btnPay.classList.remove('ready');
+                    statusHintText.textContent = "Chọn Phương thức thanh toán";
+                }
+            }
+
+            // 4. Mở Modal Thanh Toán
+            btnPay.addEventListener('click', () => {
+                if (!loggedInUid) {
+                    alert('Vui lòng nhập và bấm "Đăng nhập" UID người chơi ở Bước 1 trước!');
+                    uidInput.focus();
+                    return;
+                }
+
+                if (!selectedPaymentMethod) {
+                    alert('Vui lòng chọn 1 phương thức thanh toán ở Bước 3!');
+                    return;
+                }
+
+                // Điền thông tin vào Modal
+                modalUid.textContent = loggedInUid;
+                modalMethod.textContent = selectedPaymentMethod;
+                modalDiamonds.textContent = selectedDiamonds;
+                modalPrice.textContent = selectedPrice;
+
+                // THAY LINK MÃ QR THỰC TẾ TẠI ĐÂY
+                const qrImageUrl = "https://cdn.imagetourls.com/uploads/tyImg/19cA0zF2q.jpg";
+
+                // Render Nội dung Modal
+                modalDynamicContent.innerHTML = `
+                    <div style="text-align:center; padding:10px 0;">
+                        <p style="font-size:0.85rem; color:#666; margin-bottom:12px;">Quét mã QR bằng <b>${selectedPaymentMethod}</b> để nạp:</p>
+                        <div style="margin:0 auto; width:180px; height:180px;">
+                            <img src="${qrImageUrl}" alt="Mã QR Thanh Toán" style="width:100%; height:100%; border-radius:8px; border:1px solid #ddd;">
+                        </div>
+                        <button class="btn-login" style="width:100%; border-radius:6px; margin-top:16px;" onclick="finishPayment()">Đã Thanh Toán</button>
+                    </div>
+                `;
+
+                checkoutModal.classList.add('active');
+            });
+
+            // Đóng Modal
+            btnCloseModal.addEventListener('click', () => {
+                checkoutModal.classList.remove('active');
+            });
+
+            checkoutModal.addEventListener('click', (e) => {
+                if (e.target === checkoutModal) {
+                    checkoutModal.classList.remove('active');
+                }
+            });
+
+            window.finishPayment = () => {
+                alert('Giao dịch hoàn tất!');
+                checkoutModal.classList.remove('active');
+            };
+        });
+    </script>
+</body>
+</html>
